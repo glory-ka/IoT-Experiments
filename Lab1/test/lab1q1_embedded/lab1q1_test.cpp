@@ -31,8 +31,8 @@ void test_led_state_low(void)
 	}
 }
 
-//void setup() {
-//}
+void setup() {
+}
 
 void loop() {
 

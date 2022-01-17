@@ -8,8 +8,8 @@
         {
             "name": "PlatformIO",
             "includePath": [
-                "c:/Users/glodi.kayembe/Documents/PlatformIO/Projects/Lab1/include",
-                "c:/Users/glodi.kayembe/Documents/PlatformIO/Projects/Lab1/src",
+                "c:/Users/glodi.kayembe/Documents/PlatformIO/Projects/IoT-Experiments/Lab1/include",
+                "c:/Users/glodi.kayembe/Documents/PlatformIO/Projects/IoT-Experiments/Lab1/src",
                 "C:/Users/glodi.kayembe/.platformio/packages/framework-arduino-avr/cores/arduino",
                 "C:/Users/glodi.kayembe/.platformio/packages/framework-arduino-avr/variants/standard",
                 "C:/Users/glodi.kayembe/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
@@ -23,8 +23,8 @@
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
                 "path": [
-                    "c:/Users/glodi.kayembe/Documents/PlatformIO/Projects/Lab1/include",
-                    "c:/Users/glodi.kayembe/Documents/PlatformIO/Projects/Lab1/src",
+                    "c:/Users/glodi.kayembe/Documents/PlatformIO/Projects/IoT-Experiments/Lab1/include",
+                    "c:/Users/glodi.kayembe/Documents/PlatformIO/Projects/IoT-Experiments/Lab1/src",
                     "C:/Users/glodi.kayembe/.platformio/packages/framework-arduino-avr/cores/arduino",
                     "C:/Users/glodi.kayembe/.platformio/packages/framework-arduino-avr/variants/standard",
                     "C:/Users/glodi.kayembe/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
