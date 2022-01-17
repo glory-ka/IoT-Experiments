@@ -11,5 +11,5 @@ STEPS TO RUN TESTS IN ARDUINO UNO BOARD USING PlatformIO
     **# Test project**
     > platformio test
     
-    **# Test in the uno environment**
+    **# Test the uno environment**
     > platformio test -e uno
