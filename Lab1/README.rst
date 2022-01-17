@@ -8,7 +8,7 @@ STEPS TO RUN TESTS IN ARDUINO UNO BOARD USING PlatformIO
 
     In the terminal, if not already, change working directory to Lab1
     
-    **cd the Lad1 directory**
+    **# cd the Lad1 directory**
     > cd path/Lab1
     
     **# Test project**
