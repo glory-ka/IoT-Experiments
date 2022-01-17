@@ -1,6 +1,6 @@
 
-STEPS TO EXECUTE AND RUN THE TESTS
-====================================
+STEPS TO RUN TESTS IN ARDUINO UNO BOARD USING PlatformIO  
+=======================================================
 
 1. Install PlatformIO Core <http://docs.platformio.org/page/core.html>_
 2. Upload the source code Lab1
