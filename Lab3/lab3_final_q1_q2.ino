@@ -1,8 +1,7 @@
 int bright_ratio = 0;	// brightness
-int pinBrightness = 0;  // brightness of each pin
+int bright = 0;  // brightness of each pin
 int fade = 0;	//how faded led is
 
-int backup_bright_ratio;
 int pinIdx;
 
 int inputPOT; //Potentiometer voltage input on A0
@@ -12,7 +11,6 @@ int value;	//value from potentiometer
 int leds[] = {3,5,6,9,10,11};
 int numLED = sizeof(leds)/sizeof(int); //dynamically determine the numbers of LEDs
 
-int offset; // left-right LEDs or right-left LEDs
 
 //turn off all the LEDs
 void reset()
@@ -20,22 +18,16 @@ void reset()
 	//initial brightness		
 	for(int ledPin = 0; ledPin < numLED; ledPin ++){
 		analogWrite(leds[ledPin], LOW);
-	}
-  
+	} 
 }
 
 void setup(){
 	
 	reset(); //initialize LEDs
+  	Serial.begin(9600);
 	
-  	//safe ratio in case bright_ration = 0;
-	//that is because we don't use float, round to int. 0.9 -> 0
-	backup_bright_ratio = map(102, 0, 1023, 0 , 255); // 102 is 10% of 1023
-	
-  
-	// very important: set pinIdx to zero
-	pinIdx = 0;
-	offset = - 1; 
+	// we go from -numLED to +numLED
+	pinIdx = - numLED;
 }
 
 void loop()
@@ -43,6 +35,7 @@ void loop()
 	//check current potentiometer value
 	value = analogRead(analogInPin);
 
+	
 	//map fade to potentiometer
 	fade = map(value, 0, 1023, 0, 255);
 	
@@ -52,23 +45,32 @@ void loop()
 	
  
 	// Each led is brighter than the privious one, except the last led
-	pinBrightness = (bright_ratio ? bright_ratio : backup_bright_ratio) * ((offset < 0) ? pinIdx : numLED - pinIdx - 1);
+	// pinIdx -1 --> since we skipped zero below, and don't reach numLED. 
+	// we could have used another variable, but ....
+	bright = bright_ratio * ((pinIdx > 0) ? pinIdx -1 : -abs(pinIdx) + numLED); // part 1
+	bright = (bright == 0) ? bright : fade + bright; //part 2
+	
+  	Serial.print(-abs(pinIdx) + numLED);
+  	Serial.print("   ");
+  	Serial.println(bright);
+       
 	
 	// update pin brightness| current_pin = ledPin - offset
-	analogWrite(leds[pinIdx], pinBrightness);
+	analogWrite(leds[-abs(pinIdx) + numLED], bright);
 	
-	// move to next pin
-	pinIdx = pinIdx - offset;
+	//move to next value to find next pin
+	pinIdx ++; 
 
 	delay(500);
 	
-	// if pinIdx = over max leds index || over min leds index
-	if (pinIdx == numLED || pinIdx < 0)
+	// if pinIdx==0 or numLED + 1--> change direction
+	if (pinIdx == 0 || pinIdx == numLED + 1)
 	{
-		offset = - offset; // reverse offset polarity
-		pinIdx = (pinIdx < 0) ? pinIdx + 1 : pinIdx - 1;  // set pinIdx to max leds index or 0
+		//skip zero, as [-abs(0) -numLED] --> (idx out of bound)
+		// else reset to initial value
+		pinIdx = (pinIdx == 0) ? 1 : -numLED;
 		reset();
 		
-		delay(500);
+		delay(500); 
 	}
 }
